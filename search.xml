@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>python第一课</title>
+    <url>/2020/08/04/python%E7%AC%AC%E4%B8%80%E8%AF%BE/</url>
+    <content><![CDATA[<p>python之禅最好的翻译，转自知乎！<a href="https://zhuanlan.zhihu.com/p/40950546" target="_blank" rel="noopener">原文链接 </a></p>
+<p> PEP 20 – The Zen of PythonBeautiful is better than ugly.Explicit is better than implicit.Simple is better than complex.Complex is better than complicated.Flat is better than nested.Sparse is better than dense.Readability counts.Special cases aren’t special enough to break the rules.Although practicality beats purity.Errors should never pass silently.Unless explicitly silenced.In the face of ambiguity, refuse the temptation to guess.There should be one– and preferably only one –obvious way to do it.Although that way may not be obvious at first unless you’re Dutch.Now is better than never.Although never is often better than <em>right</em> now.If the implementation is hard to explain, it’s a bad idea.If the implementation is easy to explain, it may be a good idea.Namespaces are one honking great idea – let’s do more of those!</p>
+<a id="more"></a>
+<p>美 优于 丑<br>明确优于隐晦<br>简单优于复杂<br>复杂也好过繁复<br>扁平优于嵌套<br>稀疏优于拥挤<br>可读性很重要<br>固然代码实用与否 比洁癖更重要，<br>我们以为的特例也往往没有特殊到必须打破上述规则的程度<br>除非刻意地静默，<br>否则不要无故忽视异常<br>如果遇到模棱两可的逻辑，请不要自作聪明地瞎猜。<br>应该提供一种，且最好只提供一种，一目了然的解决方案<br>当然这是没法一蹴而就的，除非你是荷兰人<br>固然，立刻着手 好过 永远不做。<br>然而，永远不做 也好过 不审慎思考一撸袖子就莽着干<br>如果你的实现很难解释，它就一定不是个好主意<br> 即使你的实现简单到爆，它也有可能是个好办法<br> 命名空间大法好，不搞不是地球人！</p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何用ssh公钥连接主机</title>
+    <url>/2020/07/19/%E5%A6%82%E4%BD%95%E7%94%A8ssh%E5%85%AC%E9%92%A5%E8%BF%9E%E6%8E%A5%E4%B8%BB%E6%9C%BA/</url>
+    <content><![CDATA[<p>如何通过 ssh 公钥连接主机</p>
+<p>使用密码登录，每次都必须输入密码，非常麻烦。好在SSH还提供了公钥登录，可以省去输入密码的步骤。</p>
+<p>所谓”公钥登录”，原理很简单，就是用户将自己的公钥储存在远程主机上。登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码。</p>
+<p>这种方法要求用户必须提供自己的公钥。如果没有现成的，可以直接用ssh-keygen生成一个</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen</span><br></pre></td></tr></table></figure>
+
+
+
+<p>运行上面的命令以后，系统会出现一系列提示，可以一路回车。其中有一个问题是，要不要对私钥设置口令（passphrase），如果担心私钥的安全，这里可以设置一个。</p>
+<p>运行结束以后，在$HOME/.ssh/目录下，会新生成两个文件：id_rsa.pub和id_rsa。前者是你的公钥，后者是你的私钥。</p>
+<p>这时再输入下面的命令，将公钥传送到远程主机host上面：</p>
+<p>　</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ssh-copy-id user@host</span><br></pre></td></tr></table></figure>
+
+
+
+<p>好了，从此你再登录，就不需要输入密码了。</p>
+<p>如果还是不行，就打开远程主机的/etc/ssh/sshd_config这个文件，检查下面几行前面”#”注释是否取掉。</p>
+<blockquote>
+<p>　　RSAAuthentication yes<br>　　PubkeyAuthentication yes<br>　　AuthorizedKeysFile .ssh/authorized_keys</p>
+</blockquote>
+<p>然后，重启远程主机的ssh服务。</p>
+<blockquote>
+<p>　　// ubuntu系统<br>　　service ssh restart</p>
+<p>　　// debian系统<br>　　/etc/init.d/ssh restart</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux常用命令</title>
+    <url>/2020/08/10/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>$ 命令行提示符</p>
+<p><strong>粗体</strong>表示命令</p>
+<p><em>斜体</em>表示参数</p>
+<p>  <em>filename, file1, file2</em> 都是文件名。有时文件名有后缀，比如file.zip</p>
+<p>  <em>command</em> 命令名</p>
+<p>  <em>dir</em> 文件夹名</p>
+<p>  <em>string</em> 字符串</p>
+<p>  <em>username</em> 用户名</p>
+<p>  <em>groupname</em> 组名</p>
+<p>  <em>regex</em> 正则表达式</p>
+<p>  <em>path</em> 路径</p>
+<p>  <em>device</em> 设备名</p>
+<p>  <em>partition</em> 分区名</p>
+<p>  <em>IP</em> IP地址</p>
+<p>  <em>domain</em> 域名</p>
+<p>  <em>ID</em> 远程用户ID</p>
+<p>  <em>host</em> 主机名，可以为IP地址或者域名</p>
+<p>  <em>var</em> 变量名</p>
+<p>  <em>value</em> 变量值</p>
+<a id="more"></a> 
+
+<h3 id="命令帮助"><a href="#命令帮助" class="headerlink" title="命令帮助"></a>命令帮助</h3><p>$<strong>man</strong> <em>command</em></p>
+<p>查询命令command的说明文档</p>
+<p>  $<strong>man</strong> -k <em>keyword</em></p>
+<p>  查询关键字</p>
+<p>$<strong>info</strong> <em>command</em></p>
+<p>更加详细的说明文档</p>
+<p>$<strong>whatis</strong> <em>command</em></p>
+<p>简要说明</p>
+<p>$<strong>which</strong> <em>command</em></p>
+<p>command的binary文件所在路径</p>
+<p>$<strong>whereis</strong> <em>command</em></p>
+<p>在搜索路径中的所有command</p>
+<p>这里只是以command (binary file) 为例。比如man还可以用于查询系统函数、配置文件等。</p>
+<h3 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h3><p>$<strong>finger</strong> <em>username</em></p>
+<p>显示用户username的信息</p>
+<p>$<strong>who</strong></p>
+<p>显示当前登陆用户</p>
+<p>  $<strong>who</strong> am I</p>
+<p>  一个有趣的用法</p>
+<p>$<strong>write</strong> username</p>
+<p>向用户发送信息 (用EOF结束输入)</p>
+<p>$<strong>su</strong></p>
+<p>成为root用户</p>
+<p>$<strong>sudo</strong> <em>command</em></p>
+<p>以root用户身份执行</p>
+<p>$<strong>passwd</strong></p>
+<p>更改密码</p>
+<h3 id="SHELL-BASH"><a href="#SHELL-BASH" class="headerlink" title="SHELL (BASH)"></a>SHELL (BASH)</h3><p>$<strong>history</strong></p>
+<p>显示在当前shell下命令历史</p>
+<p>$<strong>alias</strong></p>
+<p>显示所有的命令别称</p>
+<p>  $<strong>alias</strong> <em>new_command</em>=’<em>command</em>‘</p>
+<p>  将命令<em>command<em>别称为</em>new_command</em></p>
+<p>$<strong>env</strong></p>
+<p>显示所有的环境变量</p>
+<p>  $<strong>export</strong> <em>var</em>=<em>value</em></p>
+<p>  设置环境变量<em>var<em>为</em>value</em>  </p>
+<p>$<strong>expr</strong> 1 + 1</p>
+<p>计算1+1</p>
+<h3 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h3><p>$<strong>du</strong> -sh <em>dir</em></p>
+<p>文件夹大小, -h 人类可读的单位, -s 只显示摘要</p>
+<p>$<strong>find</strong> . -name <em>filename</em></p>
+<p>从当前路径开始，向下寻找文件<em>filename</em></p>
+<p>$<strong>locate</strong> <em>string</em></p>
+<p>寻找包含有<em>string</em>的路径</p>
+<p>  $<strong>updatedb</strong></p>
+<p>  与<strong>find</strong>不同，<strong>locate</strong>并不是实时查找。你需要更新数据库，以获得最新信息。</p>
+<p>$<strong>ln</strong> -s <em>filename path</em></p>
+<p>为文件<em>filename</em>在<em>path</em>位置创建软链接</p>
+<p>$<strong>pwd</strong></p>
+<p>显示当前路径</p>
+<p>  $<strong>cd</strong> <em>path</em></p>
+<p>  更改当前工作路径为<em>path</em></p>
+<p>  $<strong>cd</strong> -</p>
+<p>  更改当前路径为之前的路径</p>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>$<strong>touch</strong> <em>filename</em></p>
+<p>如果文件不存在，创建一个空白文件；如果文件存在，更新文件读取和修改时间。</p>
+<p>$<strong>rm</strong> <em>filename</em></p>
+<p>删除文件</p>
+<p>$<strong>cp</strong> <em>file1 file2</em></p>
+<p>复制<em>file1<em>为</em>file2</em></p>
+<p>$<strong>ls</strong> -l <em>path</em></p>
+<p>显示文件和文件相关信息</p>
+<p>$<strong>mkdir</strong> <em>dir</em></p>
+<p>创建dir文件夹</p>
+<p>  $<strong>mkdir</strong> -p <em>path</em></p>
+<p>  递归创建路径path上的所有文件夹</p>
+<p>  $<strong>rmdir</strong> <em>dir</em></p>
+<p>  删除<em>dir</em>文件夹，<em>dir</em>必须为空文件夹。</p>
+<p>  $<strong>rm</strong> -r <em>dir</em></p>
+<p>  删除<em>dir</em>文件夹，以及其包含的所有文件</p>
+<p>$<strong>file</strong> <em>filename</em></p>
+<p>文件filename的类型描述</p>
+<p>$<strong>chown</strong> <em>username</em>:<em>groupname</em> <em>filename</em></p>
+<p>更改文件的拥有用会为<em>owne<em>r，拥有组为</em>group</em></p>
+<p>$<strong>chmod</strong> <em>755 filename</em></p>
+<p>更改文件的权限为755: owner r+w+x, group: r+x, others: r+x</p>
+<p>$<strong>od</strong> -c <em>filename</em></p>
+<p>以ASCII字符显示文件</p>
+<h3 id="文件显示"><a href="#文件显示" class="headerlink" title="文件显示"></a>文件显示</h3><p>$<strong>cat</strong> <em>filename</em></p>
+<p>显示文件<br>  $<strong>cat</strong> <em>file1 file2</em></p>
+<p>  连接显示file1和file2</p>
+<p>$<strong>head</strong> -1 <em>filename</em></p>
+<p>显示文件第一行</p>
+<p>$<strong>tail</strong> -5 <em>filename</em></p>
+<p>显示文件倒数第五行</p>
+<p>$<strong>diff</strong> <em>file1 file2</em></p>
+<p>显示<em>file1</em>和<em>file2</em>的差别</p>
+<p>$<strong>sort</strong> <em>filename</em></p>
+<p>对文件中的行排序，并显示</p>
+<p>  $<strong>sort</strong> -f <em>filename</em></p>
+<p>  排序时，不考虑大小写</p>
+<p>  $<strong>sort</strong> -u <em>filename</em></p>
+<p>  排序，并去掉重复的行</p>
+<p>$<strong>uniq</strong> <em>filename</em></p>
+<p>显示文件<em>filename</em>中不重复的行 (内容相同，但不相邻的行，不算做重复)</p>
+<p>$<strong>wc</strong> <em>filename</em></p>
+<p>统计文件中的字符、词和行数</p>
+<p>  $<strong>wc</strong> -l <em>filename</em></p>
+<p>  统计文件中的行数</p>
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p>$<strong>echo</strong> <em>string</em></p>
+<p>显示<em>string</em></p>
+<p>$<strong>echo</strong> <em>string</em> | <strong>cut</strong> -c5-7</p>
+<p>截取文本的第5到第7列</p>
+<p>$<strong>echo</strong> <em>string</em> | <strong>grep</strong> <em>regex</em></p>
+<p>显示包含正则表达式<em>regex</em>的行</p>
+<p>$<strong>echo</strong> <em>string</em> | <strong>grep</strong> -o <em>regex</em></p>
+<p>显示符合正则<em>regrex</em>的子字符串</p>
+<h3 id="时间与日期"><a href="#时间与日期" class="headerlink" title="时间与日期"></a>时间与日期</h3><p>$<strong>date</strong></p>
+<p>当前日期时间</p>
+<p>  $<strong>date</strong> +”%Y-%m-%d_%T”</p>
+<p>  以YYYY-MM-DD_HH:MM:SS的格式显示日期时间 (格式可参考$man date)</p>
+<p>  $<strong>date</strong> –date=”1999-01-03 05:30:00” 100 days</p>
+<p>  显示从1900-01-03 05:30:00向后100天的日期时间</p>
+<p>$<strong>sleep</strong> 300 </p>
+<p>休眠300秒</p>
+<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>$<strong>top</strong></p>
+<p>显示进程信息，并实时更新</p>
+<p>$<strong>ps</strong></p>
+<p>显示当前shell下的进程</p>
+<p>  $<strong>ps</strong> -lu <em>username</em></p>
+<p>  显示用户<em>username</em>的进程</p>
+<p>  $<strong>ps</strong> -ajx</p>
+<p>  以比较完整的格式显示所有的进程</p>
+<p>$<strong>kill</strong> <em>PID</em></p>
+<p>杀死PID进程 (PID为Process ID)</p>
+<p>  $<strong>kill</strong> %<em>job</em></p>
+<p>  杀死job工作 (job为job number)</p>
+<p>$<strong>lsof</strong> -u <em>username</em></p>
+<p>用户<em>username</em>的进程所打开的文件</p>
+<p>$<strong>dmesg</strong></p>
+<p>显示系统日志</p>
+<p>$<strong>time</strong> <em>a.out</em></p>
+<p>测试a.out的运行时间</p>
+<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><p>$<strong>uname</strong> -a</p>
+<p>显示系统信息</p>
+<p>$<strong>df</strong> -lh</p>
+<p>显示所有硬盘的使用状况</p>
+<p>$<strong>mount</strong></p>
+<p>显示所有的硬盘分区挂载</p>
+<p>  $<strong>mount</strong> <em>partition path</em></p>
+<p>  挂在<em>partition<em>到路径</em>path</em></p>
+<p>  $<strong>umount</strong> <em>partition</em></p>
+<p>  卸载<em>partition</em></p>
+<p>$<strong>sudo</strong> <strong>fdisk</strong> -l</p>
+<p>显示所有的分区</p>
+<p>  $<strong>sudo fdisk</strong> <em>device</em></p>
+<p>  为device(比如/dev/sdc)创建分区表。 进入后选择n, p, w</p>
+<p>  $<strong>sudo mkfs</strong> -t ext3 <em>partition</em></p>
+<p>  格式化分区<em>patition</em>(比如/dev/sdc1)</p>
+<p>  修改 /etc/fstab，以自动挂载分区。增加行：</p>
+<p>  /dev/sdc1 path(mount point) ext3 defaults 0 0</p>
+<p>$<strong>arch</strong></p>
+<p>显示架构</p>
+<p>$<strong>cat</strong> /proc/cpuinfo</p>
+<p>显示CPU信息</p>
+<p>$<strong>cat</strong> /proc/meminfo</p>
+<p>显示内存信息</p>
+<p>$<strong>free</strong></p>
+<p>显示内存使用状况</p>
+<p>$<strong>pagesize</strong></p>
+<p>显示内存page大小（以KByte为单位）</p>
+<h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><p>$<strong>ifconfig</strong></p>
+<p>显示网络接口以及相应的IP地址。ifconfig可用于设置网络接口</p>
+<p>  $<strong>ifup</strong> <em>eth0</em></p>
+<p>  运行<em>eth0</em>接口</p>
+<p>  $<strong>ifdown</strong> <em>eth0</em></p>
+<p>  关闭<em>eth0</em>接口</p>
+<p>$<strong>iwconfig</strong></p>
+<p>显示无线网络接口</p>
+<p>$<strong>route</strong></p>
+<p>显示路由表。route还可以用于修改路由表</p>
+<p>$<strong>netstat</strong></p>
+<p>显示当前的网络连接状态</p>
+<p>$<strong>ping</strong> <em>IP</em></p>
+<p>发送ping包到地址<em>IP</em></p>
+<p>$<strong>traceroute</strong> <em>IP</em></p>
+<p>探测前往地址<em>IP</em>的路由路径</p>
+<p>$<strong>dhclient</strong></p>
+<p>向DHCP主机发送DHCP请求，以获得IP地址以及其他设置信息。</p>
+<p>$<strong>host</strong> <em>domain</em></p>
+<p>DNS查询，寻找域名<em>domain</em>对应的IP</p>
+<p>  $<strong>host</strong> <em>IP</em></p>
+<p>  反向DNS查询</p>
+<p>$<strong>wget</strong> <em>url</em></p>
+<p>使用<strong>wget</strong>下载<em>url</em>指向的资源</p>
+<p>  $<strong>wget</strong> -m <em>url</em> </p>
+<p>  镜像下载</p>
+<h3 id="SSH登陆与文件传输"><a href="#SSH登陆与文件传输" class="headerlink" title="SSH登陆与文件传输"></a>SSH登陆与文件传输</h3><p>$<strong>ssh</strong> <em>ID</em>@<em>host</em></p>
+<p>ssh登陆远程服务器<em>host</em>，<em>ID</em>为用户名。</p>
+<p>$<strong>sftp</strong> <em>ID</em>@<em>host</em></p>
+<p>登陆服务器<em>host</em>，<em>ID</em>为用户名。sftp登陆后，可以使用下面的命令进一步操作：</p>
+<p>  <strong>get</strong> <em>filename</em>  # 下载文件</p>
+<p>  <strong>put</strong> <em>filename</em>  # 上传文件</p>
+<p>  <strong>ls</strong>       # 列出host上当前路径的所有文件</p>
+<p>  <strong>cd</strong>       # 在host上更改当前路径</p>
+<p>  <strong>lls</strong>       # 列出本地主机上当前路径的所有文件</p>
+<p>  <strong>lcd</strong>       # 在本地主机更改当前路径</p>
+<p>$<strong>scp</strong> <em>localpath</em> <em>ID</em>@<em>host</em>:<em>path</em></p>
+<p>将本地<em>localpath</em>指向的文件上传到远程主机的<em>path</em>路径</p>
+<p>  $<strong>scp</strong> -r <em>ID</em>@<em>site</em>:<em>path</em> <em>localpath</em></p>
+<p>  以ssh协议，遍历下载<em>path<em>路径下的整个文件系统，到本地的</em>localpath</em></p>
+<h3 id="压缩与归档"><a href="#压缩与归档" class="headerlink" title="压缩与归档"></a>压缩与归档</h3><p>$<strong>zip</strong> <em>file.zip</em> <em>file1</em> <em>file2</em></p>
+<p>将<em>file1<em>和</em>file2<em>压缩到</em>file.zip</em></p>
+<p>$<strong>unzip</strong> <em>file.zip</em></p>
+<p>解压缩<em>file.zip</em></p>
+<p>$<strong>gzip</strong> -c <em>filename &gt; file.gz</em></p>
+<p>将文件<em>filename<em>压缩到</em>file.gz</em></p>
+<p>$<strong>gunzip</strong> <em>file.gz</em></p>
+<p>解压缩<em>file.gz</em>文件</p>
+<p>$<strong>tar</strong> -cf <em>file.tar</em> <em>file1</em> <em>file2</em></p>
+<p>创建tar归档</p>
+<p>  $<strong>tar</strong> -zcvf <em>file.tar file1 file2</em></p>
+<p>  创建tar归档，并压缩</p>
+<p>  $<strong>tar</strong> -xf <em>file.tar</em></p>
+<p>  释放tar归档</p>
+<p>  $<strong>tar</strong> -zxf <em>file.tar.gz</em></p>
+<p>  解压并释放tar归档</p>
+<h3 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h3><p>$<strong>lpr</strong> <em>filename</em></p>
+<p>打印文件</p>
+<p>$<strong>lpstat</strong></p>
+<p>显示所有打印机的状态</p>
+]]></content>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo博客遇到的问题</title>
+    <url>/2020/08/10/hexo%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="1-自定义域名"><a href="#1-自定义域名" class="headerlink" title="1.自定义域名"></a>1.自定义域名</h3><p>本地推送到githup中不能将CNAME上传博客是显示不了的，</p>
+<p>要将 CNAME 文件放在source文件中。</p>
+<h3 id="2-文章生成错误"><a href="#2-文章生成错误" class="headerlink" title="2.文章生成错误"></a>2.文章生成错误</h3><p>使用 hexo new  标题新建文章后，用hexo g 生成静态文件过程发生错误</p>
+<p>解决方法。打开文章的文件，文件属性要加空格</p>
+<h3 id="3-文章插入图片"><a href="#3-文章插入图片" class="headerlink" title="3.文章插入图片"></a>3.文章插入图片</h3><p>使用阿里云图床</p>
+<a id="more"></a> 
+
+<h3 id="4-社交logo不能显示"><a href="#4-社交logo不能显示" class="headerlink" title="4.社交logo不能显示"></a>4.社交logo不能显示</h3><p>Twitter: <a href="https://twitter.com/brutustao" target="_blank" rel="noopener">https://twitter.com/brutustao</a> || twitter</p>
+<p>如果把 || twitter 去掉就显示不了logo了</p>
+<h3 id="5-增加阅读全文标签"><a href="#5-增加阅读全文标签" class="headerlink" title="5.增加阅读全文标签"></a>5.增加阅读全文标签</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在文章中添加上面的代码让博客的文章显示阅读全文</p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>旗帜鲜明的高级黑</title>
+    <url>/2020/08/12/%E6%97%97%E5%B8%9C%E9%B2%9C%E6%98%8E%E7%9A%84%E9%AB%98%E7%BA%A7%E9%BB%91/</url>
+    <content><![CDATA[<p>原文链接 <a href="https://www.qingnianli.com/1708.html" target="_blank" rel="noopener">https://www.qingnianli.com/1708.html</a></p>
+<p>（一）</p>
+<p>大宋熙宁二年（1069年）2月，宋神宗任命王安石为参知政事，并设立“制置三司条例司”，用以统筹财政。7月立淮浙江湖六路“均输法”，9月“青苗法”出台……震铄古今的“熙宁变法”开始推行。</p>
+<p>此时，距太祖开国已经109年。在这百年中，朝廷纵容功臣与官僚兼并土地，致使”富者有弥望之田，贫者无立锥之地”。大批农民丧失土地，从此遭受地主与官僚的层层盘剥，致使流民四起；富豪隐瞒土地，导致财政收入锐减。真宗时已国用不足，神宗时赤字更加严重，可谓“百年之积，惟存空簿”。</p>
+<p>如果说26年前的“庆历新政”重在限“恩荫”、抓人事，那么以“青苗法”、“方田均税法”、“市易法”等为主要措施的“熙宁变法”就重在抑兼并、抓经济。比如：用青苗法取代上等户的高利贷，限制高利贷对农民的盘剥；用方田均税法限制官僚和豪绅大地主的隐田漏税行为；用市易法使富商独占的商业利润中的一部分收归国家，打击富商对市场的操纵和垄断；均输法的推行限制富商大贾对市场的操纵和对民众的盘剥……</p>
+<a id="more"></a>
+<p>但变法终究失败。</p>
+<p>因为王荆公当时根本就没明白一件极重要的事：掌握政权的到底是谁。</p>
+<p>他以为是大宋皇帝。皇帝贵为天子，口含天宪，一声令下，万民俯首。于是他借天子口，行圣人事。</p>
+<p>然而他根本就不明白：皇帝只是官僚地主的代表，而不是官僚地主的君父。皇帝代表着官僚地主的利益，而不是官僚地主的全部。当皇帝不能代表官僚地主的利益时，皇帝……可以换。</p>
+<p>暂时换不掉呢？那就抵制你。明面上肯定不行，但可以充分发扬“敢碰硬、不硬碰”的精神：</p>
+<p>你要推青苗法，我们就硬性摊派、强制农民借贷；你要推农田水利法，我们就“积极立项”、强制百姓兴建水利；你要推募役法，我们就以此为名强制索要募役经费，连担水、理发、茶贩之类的小买卖，不交免疫钱都不许经营；至于方田均税法，丈量全国土地的都是大小甲头和小吏，而大小甲头和小吏又都是兼并富豪之家，以兼并富豪之家来丈量兼并富豪之家的土地能执行？</p>
+<p>……</p>
+<p>所以，变法一出，百姓必定不堪重负、苦不堪言。之后，我们还可以组织农民进京上访（1072年，东明县农民一千多人集体进京在王安石住宅前抗议），让你看看“民心”和“民意”何在。</p>
+<p>于是利民富国的“善法”也就成了“恶法”，王安石也难遭笔伐，骂他“聚敛害民”、“剥民兴利”，成了“乱天下”（曹太后与高太后语）的误国书生，甚至是“祸国殃民”（《神宗实录》、《宋史》）。</p>
+<p>最后还要把你变法的重要支持者都是见利忘义的“小人”这事（吕惠卿、章惇、曾布、蔡卞、吕嘉问、蔡京、李定、邓绾、薛向，没一个是正人君子），放到史书里着重“体现”下。让你知道知道，掌握政权的到底是谁。</p>
+<p>（二）</p>
+<p>洪武年间，皇帝常言：“我本淮右布衣，天下与我何加焉”。郭桓、空印两案判下，官员惶惶。整风肃贪之严，空前绝后。但皇帝是太祖，换不掉，而且用对付王荆公的方法对付他的话，被凌迟的机率显然太高，怎么办？等他死，反正他的继承人一定不是他。然后著书立说骂他，骂他薄情寡义、屠戮功臣，骂他刚愎自用、思想偏激，骂他残忍冷血、屠夫本性，实在不行了，还可以骂他“贼王八出生”（出自袁**），连画像都要画到极丑。他驱除鞑虏、复兴中华的历史功绩，我们从来都不提。</p>
+<p>（三）</p>
+<p>黄帝历4647年之后的几十年，“皇帝”认为自己不是皇帝，而是“农民的儿子”。而且也是“太祖”，换不掉，跟着他干吧，又“不轻松”（出自《让**飞》）。怎么办？他毕竟不是真皇帝，显然也不是洪武年间的那位，当然可以把对付王荆公的办法升级下对付他。他说要革命，我们就更“革命”，比他还“革命”。他说“超英赶美”，我们就“亩产十万斤”、“人有多大胆、地有多大产”，他说“要文斗”，我们就武斗，斗倒一切。要把他捧成伟大的导师、伟大的领袖、伟大的统帅和伟大的舵手，尽管他谦虚的说自己只是一个老师，那就继续捧，让他迷失，让他出错，等他死了，我们就把一切罪恶扣他头上，像骂洪武皇帝一样，骂死他，骂他是魔王、骂他是暴君、骂他反人类、骂他是腊肉……至于他建党建国建军、带领民族争得独立、摆脱被奴役地位、建成工业化强国、重塑民族自信等等的伟大历史功绩，我们从来都不提。</p>
+<p>（四）</p>
+<p>黄帝历4677年之后的一段时间，“皇帝”认为自己不是皇帝，而是“人民的儿子”。而且是“太宗”，也不好换，他居然说“太祖”仍有七分功绩，居然还不把政权交给我们，不能忍啊，怎么办？他毕竟不是真皇帝，显然也不是洪武年间的那位，当然可以把对付王荆公的办法升级下对付他。他说变法，我们也说变法，说的比他还狠，做的比他还绝，无目的的变，无节制的变，不管他死了还是活着，都要打着他的旗号、借着他的名义，把新自由主义经济学的“理想信念”插到每一个官员的“思想高地”，要宣布一切公有皆是罪恶，要宣传市场绝对万能，要抨击国家壁垒的邪恶，要鼓吹工业产业的虚无（做衬衣和做飞机一样一样的）。至于他说的另一基本点“四项基本原则”，不提就好了。要逐步引导这个政党丧失共产主义的理想信念和国有企业的经济基础，从而分崩解散，并侵吞其资产，这样我们才好摇身一变成巨富，退居幕后能掌权。至于“太宗”，今天能把他捧成“总设计师”，明天就能骂他，骂他专制腐败，骂他残酷镇压学生，骂他矮、骂他猫，反正变法过程中发生的贫富不均、医患、警民矛盾等等所有的黑锅，统统让他背，至于他承前启后、接续奋斗，强国富民、稳定发展的历史功绩，我们从来都不提。</p>
+<p>（五）</p>
+<p>你们要纪念抗日战争70周年，号召拍抗日剧，我们就积极响应，拍抗日神剧，手撕鬼子、裤裆藏雷。</p>
+<p>你们要在电视网络空间拒绝黄色，我们就把胸剪掉。</p>
+<p>你们实施“八项规定”，不让乱发福利，我们坚决执行，坚决到不发任何福利，坚决到把正常的员工福利统统停掉。</p>
+<p>你们实施“八项规定”，不让办公室超标，我们坚决执行，而且比你还坚决，坚决到“严格”细化各项标准，让你们“打隔断”，“换桌子”，再花一笔钱。用形式主义来反对官僚主义。</p>
+<p>你们实施“八项规定”，反“四风”，我们坚决执行，比你还坚决，反“四风”反到什么工作都不干。</p>
+<p>你们要推行社会主义核心价值观，我们也推，推到极致，我们会逼着每一名学生全、部、背、会。要有哪个学校的学生背不上，我们就利用网络，通报批评其校长。</p>
+<p>你们要加强意识形态工作，强调晚会的政治属性，我们就坚决执行，比你还坚决：插旗子、摆造型、说官话、喊口号，处处体现中心，处处提到大局，处处围绕核心。</p>
+<p>我们就是要让观众厌恶你、让群众讨厌你，让学生、员工厌倦你，让全社会都反对你。风向右，我们就往死了“右”，风向左，我们就往死了“左”。实事求是从来都不是我们的作风，讲究“时、度、效”也从来都不是我们的方法，我们就是要让观众、员工、学生乃至所有老百姓觉得你们假、大、空，黑暗、独裁、专制、腐败、僵化、极端、反人类。</p>
+<p>因为我们是高级黑。</p>
+<p>（六）</p>
+<p>“我们正在进行具有许多新的历史特点的伟大斗争，面临的挑战和困难前所未有，必须坚持巩固壮大主流思想舆论，弘扬主旋律，传播正能量，激发全社会团结奋进的强大力量。关键是要提高质量和水平，把握好时、度、效，增强吸引力和感染力，让群众爱听爱看、产生共鸣，充分发挥正面宣传鼓舞人、激励人的作用。”——摘自“819讲话”。</p>
+<p>其实，旗帜鲜明的推进意识形态并不代表形式上的旗帜鲜明。显然，关于“时、度、效”他们也是从来都不做、从来都不提。</p>
+<p>显然，他们已经在用当初对付主席的手段，来对付大大了……</p>
+<p>（七）</p>
+<p>熙宁九年（1076年），王安石辞去宰相，从此隐居江宁，不问世事。有人说，是因其子王雱病故的缘故。我猜，他一定是明白了些什么，心灰意冷。</p>
+<p>“时来天地皆同力、运去英雄不自由”，这本是那位自称教师的老人曾经从罗隐处信手拈来评价李延寿的诗句，但据说他在晚年常常用来幽幽自语……</p>
+<p>思之令人泪下。</p>
+]]></content>
+      <tags>
+        <tag>历史</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python爬虫（1）</title>
+    <url>/2020/09/16/python%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/</url>
+    <content><![CDATA[<h3 id="1爬虫相关库与urllib"><a href="#1爬虫相关库与urllib" class="headerlink" title="1爬虫相关库与urllib"></a>1爬虫相关库与urllib</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">response = request.urlopen(url,timeout=<span class="number">1</span>)</span><br><span class="line">print(response.read().decode(<span class="string">"utf-8"</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2网页的两种请求方式"><a href="#2网页的两种请求方式" class="headerlink" title="2网页的两种请求方式"></a>2网页的两种请求方式</h3><p>1.get方式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">response2 = request.urlopen(<span class="string">'http://httpbin.org/get'</span>, timeout=<span class="number">1</span>)</span><br><span class="line">print(response2.read())</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.post方式<br>  提交用户名和密码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">data = bytes(parse.urlencode(&#123;<span class="string">'word'</span>: <span class="string">'hello'</span>&#125;), encoding=<span class="string">'utf8'</span>)</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line">response = request.urlopen(<span class="string">'http://httpbin.org/post'</span>, data=data)</span><br><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-http头部信息的模拟"><a href="#3-http头部信息的模拟" class="headerlink" title="3.http头部信息的模拟"></a>3.http头部信息的模拟</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request, parse</span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://httpbin.org/post'</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">"Accept"</span>: <span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"</span>,</span><br><span class="line"><span class="string">"Accept-Encoding"</span>: <span class="string">"gzip, deflate, sdch"</span>,</span><br><span class="line"><span class="string">"Accept-Language"</span>: <span class="string">"zh-CN,zh;q=0.8"</span>,</span><br><span class="line"><span class="string">"Connection"</span>: <span class="string">"close"</span>,</span><br><span class="line"><span class="string">"Cookie"</span>: <span class="string">"_gauges_unique_hour=1; _gauges_unique_day=1; _gauges_unique_month=1; _gauges_unique_year=1; _gauges_unique=1"</span>,</span><br><span class="line"><span class="string">"Referer"</span>: <span class="string">"http://httpbin.org/"</span>,</span><br><span class="line"><span class="string">"Upgrade-Insecure-Requests"</span>: <span class="string">"1"</span>,</span><br><span class="line"><span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36 LBBROWSER"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dict = &#123;</span><br><span class="line"><span class="string">'name'</span>: <span class="string">'value'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data = bytes(parse.urlencode(dict), encoding=<span class="string">'utf8'</span>)</span><br><span class="line">req = request.Request(url=url, data=data, headers=headers, method=<span class="string">'POST'</span>)</span><br><span class="line">response = request.urlopen(req)</span><br><span class="line">print(response.read().decode(<span class="string">'utf-8'</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简明vim练级攻略</title>
+    <url>/2020/09/17/%E7%AE%80%E6%98%8Evim%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5/</url>
+    <content><![CDATA[<p>vim的学习曲线相当的大（参看<a href="https://coolshell.cn/articles/3125.html" target="_blank" rel="noopener">各种文本编辑器的学习曲线</a>），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《<a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/" target="_blank" rel="noopener">Learn Vim Progressively</a>》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。</p>
+<p>——————————正文开始——————————</p>
+<a id="more"></a> 
+<p>你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。</p>
+<p><a href="http://www.vim.org/" target="_blank" rel="noopener">Vim</a> the Six Billion Dollar editor</p>
+<blockquote>
+<p>Better, Stronger, Faster.</p>
+</blockquote>
+<p>学习 <a href="http://www.vim.org/" target="_blank" rel="noopener">vim</a> 并且其会成为你最后一个使用的文本编辑器。没有比这个更好的文本编辑器了，非常地难学，但是却不可思议地好用。</p>
+<p>我建议下面这四个步骤：</p>
+<ol>
+<li>存活</li>
+<li>感觉良好</li>
+<li>觉得更好，更强，更快</li>
+<li>使用VIM的超能力</li>
+</ol>
+<p>当你走完这篇文章，你会成为一个vim的 superstar。</p>
+<p>在开始学习以前，我需要给你一些警告：</p>
+<ul>
+<li>学习vim在开始时是痛苦的。</li>
+<li>需要时间</li>
+<li>需要不断地练习，就像你学习一个乐器一样。</li>
+<li>不要期望你能在3天内把vim练得比别的编辑器更有效率。</li>
+<li>事实上，你需要2周时间的苦练，而不是3天。</li>
+</ul>
+<p>目录</p>
+<p><a href="https://coolshell.cn/articles/5426.html#第一级_–_存活" target="_blank" rel="noopener">第一级 – 存活</a><a href="https://coolshell.cn/articles/5426.html#第二级_–_感觉良好" target="_blank" rel="noopener">第二级 – 感觉良好</a><a href="https://coolshell.cn/articles/5426.html#第三级_–_更好，更强，更快" target="_blank" rel="noopener">第三级 – 更好，更强，更快</a><a href="https://coolshell.cn/articles/5426.html#更好" target="_blank" rel="noopener">更好</a><a href="https://coolshell.cn/articles/5426.html#更强" target="_blank" rel="noopener">更强</a><a href="https://coolshell.cn/articles/5426.html#更快" target="_blank" rel="noopener">更快</a><a href="https://coolshell.cn/articles/5426.html#第四级_–_Vim_超能力" target="_blank" rel="noopener">第四级 – Vim 超能力</a><a href="https://coolshell.cn/articles/5426.html#在当前行上移动光标_0_^_$_f_F_t_T_,_;" target="_blank" rel="noopener">在当前行上移动光标: 0 ^ $ f F t T , ;</a><a href="https://coolshell.cn/articles/5426.html#区域选择_a_或_i" target="_blank" rel="noopener">区域选择 a 或 i</a><a href="https://coolshell.cn/articles/5426.html#块操作" target="_blank" rel="noopener">块操作: </a><a href="https://coolshell.cn/articles/5426.html#自动提示：_和" target="_blank" rel="noopener">自动提示： 和 </a><a href="https://coolshell.cn/articles/5426.html#宏录制：_qa_操作序列_q,_@a,_@@" target="_blank" rel="noopener">宏录制： qa 操作序列 q, @a, @@</a><a href="https://coolshell.cn/articles/5426.html#可视化选择：_v,V," target="_blank" rel="noopener">可视化选择： v,V,</a><a href="https://coolshell.cn/articles/5426.html#分屏_split_和_vsplit" target="_blank" rel="noopener">分屏: :split 和 vsplit.</a><a href="https://coolshell.cn/articles/5426.html#结束语" target="_blank" rel="noopener">结束语</a></p>
+<h4 id="第一级-–-存活"><a href="#第一级-–-存活" class="headerlink" title="第一级 – 存活"></a>第一级 – 存活</h4><ol>
+<li>安装 <a href="http://www.vim.org/" target="_blank" rel="noopener">vim</a></li>
+<li>启动 vim</li>
+<li><strong>什么也别干！</strong>请先阅读</li>
+</ol>
+<p>当你安装好一个编辑器后，你一定会想在其中输入点什么东西，然后看看这个编辑器是什么样子。但vim不是这样的，请按照下面的命令操作：</p>
+<ul>
+<li>启 动Vim后，vim在 <em>Normal</em> 模式下。</li>
+<li>让我们进入 <em>Insert</em> 模式，请按下键 i 。(陈皓注：你会看到vim左下角有一个–insert–字样，表示，你可以以插入的方式输入了）</li>
+<li>此时，你可以输入文本了，就像你用“记事本”一样。</li>
+<li>如果你想返回 <em>Normal</em> 模式，请按 <code>ESC</code> 键。</li>
+</ul>
+<p>现在，你知道如何在 <em>Insert</em> 和 <em>Normal</em> 模式下切换了。下面是一些命令，可以让你在 <em>Normal</em> 模式下幸存下来：</p>
+<blockquote>
+<ul>
+<li><code>i</code> → <em>Insert</em> 模式，按 <code>ESC</code> 回到 <em>Normal</em> 模式.</li>
+<li><code>x</code> → 删当前光标所在的一个字符。</li>
+<li><code>:wq</code> → 存盘 + 退出 (<code>:w</code> 存盘, <code>:q</code> 退出)  （陈皓注：:w 后可以跟文件名）</li>
+<li><code>dd</code> → 删除当前行，并把删除的行存到剪贴板里</li>
+<li><code>p</code> → 粘贴剪贴板</li>
+</ul>
+<p><strong>推荐</strong>:</p>
+<ul>
+<li><code>hjkl</code> (强例推荐使用其移动光标，但不必需) →你也可以使用光标键 (←↓↑→). 注: <code>j</code> 就像下箭头。</li>
+<li><code>:help &lt;command&gt;</code> → 显示相关命令的帮助。你也可以就输入 <code>:help</code> 而不跟命令。（陈皓注：退出帮助需要输入:q）</li>
+</ul>
+</blockquote>
+<p>你能在vim幸存下来只需要上述的那5个命令，你就可以编辑文本了，你一定要把这些命令练成一种下意识的状态。于是你就可以开始进阶到第二级了。</p>
+<p>当是，在你进入第二级时，需要再说一下 <em>Normal</em> 模式。在一般的编辑器下，当你需要copy一段文字的时候，你需要使用 <code>Ctrl</code> 键，比如：<code>Ctrl-C</code>。也就是说，Ctrl键就好像功能键一样，当你按下了功能键Ctrl后，C就不在是C了，而且就是一个命令或是一个快键键了，<strong>在VIM的Normal模式下，所有的键就是功能键了</strong>。这个你需要知道。</p>
+<p>标记:</p>
+<ul>
+<li>下面的文字中，如果是 <code>Ctrl-λ</code>我会写成 <code>&lt;C-λ&gt;</code>.</li>
+<li>以 <code>:</code> 开始的命令你需要输入 <code>&lt;enter&gt;</code>回车，例如 — 如果我写成 <code>:q</code> 也就是说你要输入 <code>:q&lt;enter&gt;</code>.</li>
+</ul>
+<h4 id="第二级-–-感觉良好"><a href="#第二级-–-感觉良好" class="headerlink" title="第二级 – 感觉良好"></a>第二级 – 感觉良好</h4><p>上面的那些命令只能让你存活下来，现在是时候学习一些更多的命令了，下面是我的建议：（陈皓注：所有的命令都需要在Normal模式下使用，如果你不知道现在在什么样的模式，你就狂按几次ESC键）</p>
+<ol>
+<li><p>各种插入模式</p>
+<blockquote>
+<ul>
+<li><code>a</code> → 在光标后插入</li>
+<li><code>o</code> → 在当前行后插入一个新行</li>
+<li><code>O</code> → 在当前行前插入一个新行</li>
+<li><code>cw</code> → 替换从光标所在位置后到一个单词结尾的字符</li>
+</ul>
+</blockquote>
+</li>
+<li><p>简单的移动光标</p>
+<blockquote>
+<ul>
+<li><code>0</code> → 数字零，到行头</li>
+<li><code>^</code> → 到本行第一个不是blank字符的位置（所谓blank字符就是空格，tab，换行，回车等）</li>
+<li><code>$</code> → 到本行行尾</li>
+<li><code>g_</code> → 到本行最后一个不是blank字符的位置。</li>
+<li><code>/pattern</code> → 搜索 <code>pattern</code> 的字符串（陈皓注：如果搜索出多个匹配，可按n键到下一个）</li>
+</ul>
+</blockquote>
+</li>
+<li><p>拷贝/粘贴</p>
+</li>
+</ol>
+<p>   （陈皓注：p/P都可以，p是表示在当前位置之后，P表示在当前位置之前）</p>
+<blockquote>
+<ul>
+<li><code>P</code> → 粘贴</li>
+<li><code>yy</code> → 拷贝当前行当行于 <code>ddP</code></li>
+</ul>
+</blockquote>
+<ol start="4">
+<li><p>Undo/Redo</p>
+<blockquote>
+<ul>
+<li><code>u</code> → undo</li>
+<li><code>&lt;C-r&gt;</code> → redo</li>
+</ul>
+</blockquote>
+</li>
+<li><p>打开/保存/退出/改变文件</p>
+<p>(Buffer)</p>
+<blockquote>
+<ul>
+<li><code>:e &lt;path/to/file&gt;</code> → 打开一个文件</li>
+<li><code>:w</code> → 存盘</li>
+<li><code>:saveas &lt;path/to/file&gt;</code> → 另存为 <code>&lt;path/to/file&gt;</code></li>
+<li><code>:x</code>， <code>ZZ</code> 或 <code>:wq</code> → 保存并退出 (<code>:x</code> 表示仅在需要时保存，ZZ不需要输入冒号并回车)</li>
+<li><code>:q!</code> → 退出不保存 <code>:qa!</code> 强行退出所有的正在编辑的文件，就算别的文件有更改。</li>
+<li><code>:bn</code> 和 <code>:bp</code> → 你可以同时打开很多文件，使用这两个命令来切换下一个或上一个文件。（陈皓注：我喜欢使用:n到下一个文件）</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p>花点时间熟悉一下上面的命令，一旦你掌握他们了，你就几乎可以干其它编辑器都能干的事了。但是到现在为止，你还是觉得使用vim还是有点笨拙，不过没关系，你可以进阶到第三级了。</p>
+<h4 id="第三级-–-更好，更强，更快"><a href="#第三级-–-更好，更强，更快" class="headerlink" title="第三级 – 更好，更强，更快"></a>第三级 – 更好，更强，更快</h4><p>先恭喜你！你干的很不错。我们可以开始一些更为有趣的事了。在第三级，我们只谈那些和vi可以兼容的命令。</p>
+<h5 id="更好"><a href="#更好" class="headerlink" title="更好"></a>更好</h5><p>下面，让我们看一下vim是怎么重复自己的：</p>
+<ol>
+<li><code>.</code> → (小数点) 可以重复上一次的命令</li>
+<li>N<command> → 重复某个命令N次</li>
+</ol>
+<p>下面是一个示例，找开一个文件你可以试试下面的命令：</p>
+<blockquote>
+<ul>
+<li><code>2dd</code> → 删除2行</li>
+<li><code>3p</code> → 粘贴文本3次</li>
+<li><code>100idesu [ESC]</code> → 会写下 “desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu desu “</li>
+<li><code>.</code> → 重复上一个命令—— 100 “desu “.</li>
+<li><code>3.</code> → 重复 3 次 “desu” (注意：不是 300，你看，VIM多聪明啊).</li>
+</ul>
+</blockquote>
+<h5 id="更强"><a href="#更强" class="headerlink" title="更强"></a>更强</h5><p>你要让你的光标移动更有效率，你一定要了解下面的这些命令，<strong>千万别跳过</strong>。</p>
+<ol>
+<li><p>N<code>G</code> → 到第 N 行 （陈皓注：注意命令中的G是大写的，另我一般使用 : N 到第N行，如 :137 到第137行）</p>
+</li>
+<li><p><code>gg</code> → 到第一行。（陈皓注：相当于1G，或 :1）</p>
+</li>
+<li><p><code>G</code> → 到最后一行。</p>
+</li>
+<li><p>按单词移动：</p>
+<blockquote>
+<ol>
+<li><code>w</code> → 到下一个单词的开头。</li>
+<li><code>e</code> → 到下一个单词的结尾。</li>
+</ol>
+<p>&gt; 如果你认为单词是由默认方式，那么就用小写的e和w。默认上来说，一个单词由字母，数字和下划线组成（陈皓注：程序变量）</p>
+<p>&gt; 如果你认为单词是由blank字符分隔符，那么你需要使用大写的E和W。（陈皓注：程序语句）</p>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/word_moves.jpg" alt="Word moves example"></p>
+</blockquote>
+</li>
+</ol>
+<p>下面，让我来说说最强的光标移动：</p>
+<blockquote>
+<ul>
+<li><code>%</code> : 匹配括号移动，包括 <code>(</code>, <code>{</code>, <code>[</code>. （陈皓注：你需要把光标先移到括号上）</li>
+<li><code>*</code> 和 <code>#</code>:  匹配光标当前所在的单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）</li>
+</ul>
+</blockquote>
+<p>相信我，上面这三个命令对程序员来说是相当强大的。</p>
+<h5 id="更快"><a href="#更快" class="headerlink" title="更快"></a>更快</h5><p>你一定要记住光标的移动，因为很多命令都可以和这些移动光标的命令连动。很多命令都可以如下来干：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;start position&gt;&lt;command&gt;&lt;end position&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如 <code>0y$</code> 命令意味着：</p>
+<ul>
+<li><code>0</code> → 先到行头</li>
+<li><code>y</code> → 从这里开始拷贝</li>
+<li><code>$</code> → 拷贝到本行最后一个字符</li>
+</ul>
+<p>你可可以输入 <code>ye</code>，从当前位置拷贝到本单词的最后一个字符。</p>
+<p>你也可以输入 <code>y2/foo</code> 来拷贝2个 “foo” 之间的字符串。</p>
+<p>还有很多时间并不一定你就一定要按y才会拷贝，下面的命令也会被拷贝：</p>
+<ul>
+<li><code>d</code> (删除 )</li>
+<li><code>v</code> (可视化的选择)</li>
+<li><code>gU</code> (变大写)</li>
+<li><code>gu</code> (变小写)</li>
+<li>等等</li>
+</ul>
+<p>（陈皓注：可视化选择是一个很有意思的命令，你可以先按v，然后移动光标，你就会看到文本被选择，然后，你可能d，也可y，也可以变大写等）</p>
+<h4 id="第四级-–-Vim-超能力"><a href="#第四级-–-Vim-超能力" class="headerlink" title="第四级 – Vim 超能力"></a>第四级 – Vim 超能力</h4><p>你只需要掌握前面的命令，你就可以很舒服的使用VIM了。但是，现在，我们向你介绍的是VIM杀手级的功能。下面这些功能是我只用vim的原因。</p>
+<h5 id="在当前行上移动光标-0-f-F-t-T"><a href="#在当前行上移动光标-0-f-F-t-T" class="headerlink" title="在当前行上移动光标: 0 ^ $ f F t T , ;"></a>在当前行上移动光标: <code>0</code> <code>^</code> <code>$</code> <code>f</code> <code>F</code> <code>t</code> <code>T</code> <code>,</code> <code>;</code></h5><blockquote>
+<ul>
+<li><code>0</code> → 到行头</li>
+<li><code>^</code> → 到本行的第一个非blank字符</li>
+<li><code>$</code> → 到行尾</li>
+<li><code>g_</code> → 到本行最后一个不是blank字符的位置。</li>
+<li><code>fa</code> → 到下一个为a的字符处，你也可以fs到下一个为s的字符。</li>
+<li><code>t,</code> → 到逗号前的第一个字符。逗号可以变成其它字符。</li>
+<li><code>3fa</code> → 在当前行查找第三个出现的a。</li>
+<li><code>F</code> 和 <code>T</code> → 和 <code>f</code> 和 <code>t</code> 一样，只不过是相反方向。<br><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/line_moves.jpg" alt="Line moves"></li>
+</ul>
+</blockquote>
+<p>还有一个很有用的命令是 <code>dt&quot;</code> → 删除所有的内容，直到遇到双引号—— <code>&quot;。</code></p>
+<h5 id="区域选择-lt-action-gt-a-lt-object-gt-或-lt-action-gt-i-lt-object-gt"><a href="#区域选择-lt-action-gt-a-lt-object-gt-或-lt-action-gt-i-lt-object-gt" class="headerlink" title="区域选择 &lt;action&gt;a&lt;object&gt; 或 &lt;action&gt;i&lt;object&gt;"></a>区域选择 <code>&lt;action&gt;a&lt;object&gt;</code> 或 <code>&lt;action&gt;i&lt;object&gt;</code></h5><p>在visual 模式下，这些命令很强大，其命令格式为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;action&gt;a&lt;object&gt;&#96; 和 &#96;&lt;action&gt;i&lt;object&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>action可以是任何的命令，如 <code>d</code> (删除), <code>y</code> (拷贝), <code>v</code> (可以视模式选择)。</li>
+<li>object 可能是： <code>w</code> 一个单词， <code>W</code> 一个以空格为分隔的单词， <code>s</code> 一个句字， <code>p</code> 一个段落。也可以是一个特别的字符：<code>&quot;、</code> <code>&#39;、</code> <code>)、</code> <code>}、</code> <code>]。</code></li>
+</ul>
+<p>假设你有一个字符串 <code>(map (+) (&quot;foo&quot;))</code>.而光标键在第一个 <code>o</code>的位置。</p>
+<blockquote>
+<ul>
+<li><code>vi&quot;</code> → 会选择 <code>foo</code>.</li>
+<li><code>va&quot;</code> → 会选择 <code>&quot;foo&quot;</code>.</li>
+<li><code>vi)</code> → 会选择 <code>&quot;foo&quot;</code>.</li>
+<li><code>va)</code> → 会选择<code>(&quot;foo&quot;)</code>.</li>
+<li><code>v2i)</code> → 会选择 <code>map (+) (&quot;foo&quot;)</code></li>
+<li><code>v2a)</code> → 会选择 <code>(map (+) (&quot;foo&quot;))</code></li>
+</ul>
+</blockquote>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/textobjects.png" alt="Text objects selection"></p>
+<h5 id="块操作-lt-C-v-gt"><a href="#块操作-lt-C-v-gt" class="headerlink" title="块操作: &lt;C-v&gt;"></a>块操作: <code>&lt;C-v&gt;</code></h5><p>块操作，典型的操作： <code>0 &lt;C-v&gt; &lt;C-d&gt; I-- [ESC]</code></p>
+<ul>
+<li><code>^</code> → 到行头</li>
+<li><code>&lt;C-v&gt;</code> → 开始块操作</li>
+<li><code>&lt;C-d&gt;</code> → 向下移动 (你也可以使用hjkl来移动光标，或是使用%，或是别的)</li>
+<li><code>I-- [ESC]</code> → I是插入，插入“<code>--</code>”，按ESC键来为每一行生效。</li>
+</ul>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/completion.gif" alt="Rectangular blocks"></p>
+<p>在Windows下的vim，你需要使用 <code>&lt;C-q&gt;</code> 而不是 <code>&lt;C-v&gt;</code> ，<code>&lt;C-v&gt;</code> 是拷贝剪贴板。</p>
+<h5 id="自动提示：-lt-C-n-gt-和-lt-C-p-gt"><a href="#自动提示：-lt-C-n-gt-和-lt-C-p-gt" class="headerlink" title="自动提示： &lt;C-n&gt; 和 &lt;C-p&gt;"></a>自动提示： <code>&lt;C-n&gt;</code> 和 <code>&lt;C-p&gt;</code></h5><p>在 Insert 模式下，你可以输入一个词的开头，然后按 <code>&lt;C-p&gt;或是&lt;C-n&gt;，自动补齐功能就出现了……</code></p>
+<p>``<img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/completion.gif" alt="Completion"></p>
+<h5 id="宏录制：-qa-操作序列-q-a"><a href="#宏录制：-qa-操作序列-q-a" class="headerlink" title="宏录制： qa 操作序列 q, @a, @@"></a>宏录制： <code>qa</code> 操作序列 <code>q</code>, <code>@a</code>, <code>@@</code></h5><ul>
+<li><code>qa</code> 把你的操作记录在寄存器 <code>a。</code></li>
+<li>于是 <code>@a</code> 会replay被录制的宏。</li>
+<li><code>@@</code> 是一个快捷键用来replay最新录制的宏。</li>
+</ul>
+<blockquote>
+<p><strong><em>示例\</em></strong></p>
+<p>在一个只有一行且这一行只有“1”的文本中，键入如下命令：</p>
+<ul>
+<li><pre><code>qaYp&lt;C-a&gt;q</code></pre><p>→</p>
+<ul>
+<li><code>qa</code> 开始录制</li>
+<li><code>Yp</code> 复制行.</li>
+<li><code>&lt;C-a&gt;</code> 增加1.</li>
+<li><code>q</code> 停止录制.</li>
+</ul>
+</li>
+<li><p><code>@a</code> → 在1下面写下 2</p>
+</li>
+<li><p><code>@@</code> → 在2 正面写下3</p>
+</li>
+<li><p>现在做 <code>100@@</code> 会创建新的100行，并把数据增加到 103.</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/macros.gif" alt="Macros"></p>
+<h5 id="可视化选择：-v-V-lt-C-v-gt"><a href="#可视化选择：-v-V-lt-C-v-gt" class="headerlink" title="可视化选择： v,V,&lt;C-v&gt;"></a>可视化选择： <code>v</code>,<code>V</code>,<code>&lt;C-v&gt;</code></h5><p>前面，我们看到了 <code>&lt;C-v&gt;</code>的示例 （在Windows下应该是<C-q>），我们可以使用 <code>v</code> 和 <code>V</code>。一但被选好了，你可以做下面的事：</p>
+<ul>
+<li><code>J</code> → 把所有的行连接起来（变成一行）</li>
+<li><code>&lt;</code> 或 <code>&gt;</code> → 左右缩进</li>
+<li><code>=</code> → 自动给缩进 （陈皓注：这个功能相当强大，我太喜欢了）</li>
+</ul>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/autoindent.gif" alt="Autoindent"></p>
+<p>在所有被选择的行后加上点东西：</p>
+<ul>
+<li><code>&lt;C-v&gt;</code></li>
+<li>选中相关的行 (可使用 <code>j</code> 或 <code>&lt;C-d&gt;</code> 或是 <code>/pattern</code> 或是 <code>%</code> 等……)</li>
+<li><code>$</code> 到行最后</li>
+<li><code>A</code>, 输入字符串，按 <code>ESC。</code></li>
+</ul>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/append-to-many-lines.gif" alt="Append to many lines"></p>
+<h5 id="分屏-split-和-vsplit"><a href="#分屏-split-和-vsplit" class="headerlink" title="分屏: :split 和 vsplit."></a>分屏: <code>:split</code> 和 <code>vsplit</code>.</h5><p>下面是主要的命令，你可以使用VIM的帮助 <code>:help split</code>. 你可以参考本站以前的一篇文章<a href="https://coolshell.cn/articles/1679.html" target="_blank" rel="noopener">VIM分屏</a>。</p>
+<blockquote>
+<ul>
+<li><code>:split</code> → 创建分屏 (<code>:vsplit</code>创建垂直分屏)</li>
+<li><code>&lt;C-w&gt;&lt;dir&gt;</code> : dir就是方向，可以是 <code>hjkl</code> 或是 ←↓↑→ 中的一个，其用来切换分屏。</li>
+<li><code>&lt;C-w&gt;_</code> (或 <code>&lt;C-w&gt;|</code>) : 最大化尺寸 (<C-w>| 垂直分屏)</li>
+<li><code>&lt;C-w&gt;+</code> (或 <code>&lt;C-w&gt;-</code>) : 增加尺寸</li>
+</ul>
+</blockquote>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/split.gif" alt="Split"></p>
+<h4 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h4><ul>
+<li><p>上面是作者最常用的90%的命令。</p>
+</li>
+<li><p>我建议你每天都学1到2个新的命令。</p>
+</li>
+<li><p>在两到三周后，你会感到vim的强大的。</p>
+</li>
+<li><p>有时候，学习VIM就像是在死背一些东西。</p>
+</li>
+<li><p>幸运的是，vim有很多很不错的工具和优秀的文档。</p>
+</li>
+<li><p>运行vimtutor直到你熟悉了那些基本命令。</p>
+</li>
+<li><p>其在线帮助文档中你应该要仔细阅读的是 <code>:help usr_02.txt</code>.</p>
+</li>
+<li><p>你会学习到诸如 <code>!，</code> 目录，寄存器，插件等很多其它的功能。</p>
+</li>
+</ul>
+<p>学习vim就像学弹钢琴一样，一旦学会，受益无穷。</p>
+]]></content>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python简史</title>
+    <url>/2020/09/20/Python%E7%AE%80%E5%8F%B2/</url>
+    <content><![CDATA[<p>作者：Vamei 出处：<a href="http://www.cnblogs.com/vamei" target="_blank" rel="noopener">http://www.cnblogs.com/vamei</a> 欢迎转载，也请保留这段声明。谢谢！</p>
+<p>Python是我喜欢的语言，简洁，优美，容易使用。前两天，我很激昂的向朋友宣传Python的好处。</p>
+<p>听过之后，朋友问我：好吧，我承认Python不错，但它为什么叫Python呢？</p>
+<p>我不是很确定：呃，似乎是一个电视剧的名字。</p>
+<p>朋友又问：那你说的Guido是美国人么？ (Guido von Rossum，Python的作者)</p>
+<p>我再次不是很确定：他从google换到Dropbox工作，但他的名字像是荷兰人的 (有一个von在中间)。</p>
+ <a id="more"></a>
+
+<p>所以，后面我花了些时间调查Python的历史。这是很好的学习。我看到了Python中许多功能的来源和Python的设计理念，比如哪些功能是历史遗留，哪些功能是重复，如何增加功能…… 而且，Python也是开源(open source)运动的一个成功案例。从Python的历史中，我们可以一窥开源开发的理念和成就。</p>
+<p>这也可以作为我写的<a href="http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Python快速教程</a>的序篇。</p>
+<h3 id="Python的起源"><a href="#Python的起源" class="headerlink" title="Python的起源"></a>Python的起源</h3><p>Python的作者，Guido von Rossum，确实是荷兰人。1982年，Guido从阿姆斯特丹大学(University of Amsterdam)获得了数学和计算机硕士学位。然而，尽管他算得上是一位数学家，但他更加享受计算机带来的乐趣。用他的话说，尽管拥有数学和计算机双料资质，他总趋向于做计算机相关的工作，并热衷于做任何和编程相关的活儿。</p>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/06100633-c2ce8755002945df846b5dad1dc25cdd.jpg" alt="img"></p>
+<p>Guido von Rossum</p>
+<p>在那个时候，他接触并使用过诸如Pascal、C、 Fortran等语言。这些语言的基本设计原则是让机器能更快运行。在80年代，虽然IBM和苹果已经掀起了个人电脑浪潮，但这些个人电脑的配置很低 (在今天看来)。比如早期的Macintosh，只有8MHz的CPU主频和128KB的RAM，一个大的数组就能占满内存。所有的编译器的核心是做优化，以便让程序能够运行。为了增进效率，语言也迫使程序员像计算机一样思考，以便能写出更符合机器口味的程序。在那个时代，程序员恨不得用手榨取计算机每一寸的能力。有人甚至认为C语言的指针是在浪费内存。至于动态类型，内存自动管理，面向对象…… 别想了，那会让你的电脑陷入瘫痪。</p>
+<p>然而，这种思考方式让Guido感到苦恼。Guido知道如何用C语言写出一个功能，但整个编写过程需要耗费大量的时间 (即使他已经准确的知道了如何实现)。他的另一个选择是shell。Bourne Shell作为UNIX系统的解释器(interpreter)已经长期存在。UNIX的管理员们常常用shell去写一些简单的脚本，以进行一些系统维护的工作，比如定期备份、文件系统管理等等。shell可以像胶水一样，将UNIX下的许多功能连接在一起。许多C语言下上百行的程序，在shell下只用几行就可以完成。然而，shell的本质是调用命令。它并不是一个真正的语言。比如说，shell没有数值型的数据类型，加法运算都很复杂。总之，shell不能全面的调动计算机的功能。</p>
+<p>(关于shell，你可以参考<a href="http://www.cnblogs.com/vamei/archive/2012/09/19/2692452.html" target="_blank" rel="noopener">Linux架构</a>和<a href="http://www.cnblogs.com/vamei/archive/2012/09/10/2676740.html" target="_blank" rel="noopener">Linux命令行与命令</a>)</p>
+<p>Guido希望有一种语言，这种语言能够像C语言那样，能够全面调用计算机的功能接口，又可以像shell那样，可以轻松的编程。ABC语言让Guido看到希望。ABC是由荷兰的CWI (Centrum Wiskunde &amp; Informatica, 数学和计算机研究所)开发的。Guido在CWI工作，并参与到ABC语言的开发。ABC语言以教学为目的。与当时的大部分语言不同，ABC语言的目标是“让用户感觉更好”。ABC语言希望让语言变得容易阅读，容易使用，容易记忆，容易学习，并以此来激发人们学习编程的兴趣。比如下面是一段来自Wikipedia的ABC程序，这个程序用于统计文本中出现的词(word)的总数：</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HOW TO RETURN words document:</span><br><span class="line">   PUT &#123;&#125; IN collection</span><br><span class="line">   FOR line IN document:</span><br><span class="line">      FOR word IN split line:</span><br><span class="line">         IF word not.in collection:</span><br><span class="line">            INSERT word IN collection</span><br><span class="line">   RETURN collection</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>HOW TO用于定义一个函数。一个Python程序员应该很容易理解这段程序。ABC语言使用冒号(:)和缩进来表示程序块(C语言使用{}来表示程序块)。行尾没有分号。for和if结构中也没有括号()。如果将HOW TO改为def，将PUT行改为collection = []，将INSERT行改为collection.append(word)，这就几乎是一个标准的Python函数。上面的函数读起来就像一段自然的文字。</p>
+<p>尽管已经具备了良好的可读性和易用性，ABC语言最终没有流行起来。在当时，ABC语言编译器需要比较高配置的电脑才能运行。而这些电脑的使用者通常精通计算机，他们更多考虑程序的效率，而非它的学习难度。除了硬件上的困难外，ABC语言的设计也存在一些致命的问题：</p>
+<ul>
+<li><strong>可拓展性差</strong>。ABC语言不是模块化语言。如果想在ABC语言中增加功能，比如对图形化的支持，就必须改动很多地方。</li>
+<li><strong>不能直接进行IO</strong>。ABC语言不能直接操作文件系统。尽管你可以通过诸如文本流的方式导入数据，但ABC无法直接读写文件。输入输出的困难对于计算机语言来说是致命的。你能想像一个打不开车门的跑车么？</li>
+<li><strong>过度革新</strong>。ABC用自然语言的方式来表达程序的意义，比如上面程序中的HOW TO (如何)。然而对于程序员来说，他们更习惯用function或者define来定义一个函数。同样，程序员也习惯了用等号(=)来分配变量。这尽管让ABC语言显得特别，但实际上增加了程序员的学习难度 (程序员大都掌握不止一种语言)。</li>
+<li><strong>传播困难</strong>。ABC编译器很大，必须被保存在磁带(tape)上。当时Guido在访问的时候，就必须有一个大磁带来给别人安装ABC编译器。 这样，ABC语言就很难快速传播。</li>
+</ul>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/06111717-51622dbe8fbb4e54ae64f834584180c0.gif" alt="img">IBM tape drive：读写磁带</p>
+<p>1989年，为了打发圣诞节假期，Guido开始写Python语言的编译/解释器。Python来自Guido所挚爱的电视剧Monty Python’s Flying Circus (BBC1960-1970年代播放的室内情景幽默剧，以当时的英国生活为素材)。他希望这个新的叫做Python的语言，能实现他的理念(一种C和shell之间，功能全面，易学易用，可拓展的语言)。Guido作为一个语言设计爱好者，已经有过设计语言的(不很成功)的尝试。这一次，也不过是一次纯粹的hacking行为。</p>
+<h3 id="Python的诞生"><a href="#Python的诞生" class="headerlink" title="Python的诞生"></a>Python的诞生</h3><p>1991年，第一个Python编译器(同时也是解释器)诞生。它是用C语言实现的，并能够调用C库(.so文件)。从一出生，Python已经具有了：类(class)，函数(function)，异常处理(exception)，包括表(list)和词典(dictionary)在内的核心数据类型，以及模块(module)为基础的拓展系统。</p>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/06121511-82e43957fefe4c13ac06bd02a5e9d97a.png" alt="img"></p>
+<p>最初的Python logo: 由Guido的兄弟Just von Rossum设计</p>
+<p>Python语法很多来自C，但又受到ABC语言的强烈影响。来自ABC语言的一些规定直到今天还富有争议，比如强制缩进。但这些语法规定让Python容易读。另一方面，Python聪明的选择服从一些惯例(特别是C语言的惯例)。比如使用等号赋值，使用def来定义函数。Guido认为，如果“常识”上确立的东西，没有必要过度纠结。</p>
+<p>Python从一开始就特别在意可拓展性(extensibility)。Python可以在多个层次上拓展。从高层上，你可以引入.py文件。在底层，你可以引用C语言的库。Python程序员可以快速的使用Python写.py文件作为拓展模块。但当性能是考虑的重要因素时，Python程序员可以深入底层，写C程序，编译为.so文件引入到Python中使用。Python就好像是使用钢构建房一样，先规定好大的框架。而程序员可以在此框架下相当自由的拓展或更改。</p>
+<p>最初的Python完全由Guido本人开发。Python得到Guido同事的欢迎。他们迅速的反馈使用意见，并参与到Python的改进。Guido和一些同事构成Python的核心团队。他们将自己大部分的业余时间用于hack Python (也包括工作时间，因为他们将Python用于工作)。随后，Python拓展到CWI之外。Python将许多机器层面上的细节隐藏，交给编译器处理，并凸显出逻辑层面的编程思考。Python程序员可以花更多的时间用于思考程序的逻辑，而不是具体的实现细节 (Guido有一件T恤，写着：人生苦短，我用Python)。这一特征吸引了广大的程序员。Python开始流行。</p>
+<p>我们不得不暂停我们的Python时间，转而看一看这时的计算机概况。1990年代初，个人计算机开始进入普通家庭。Intel发布了486处理器，windows发布window 3.0开始的一系列视窗系统。计算机的性能大大提高。程序员开始关注计算机的易用性 (比如图形化界面)。<img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/06121437-2bed48b285d746c2a147d1d63cc05483.png" alt="img"></p>
+<p>Windows 3.0</p>
+<p>由于计算机性能的提高，软件的世界也开始随之改变。硬件足以满足许多个人电脑的需要。硬件厂商甚至渴望高需求软件的出现，以带动硬件的更新换代。C++和Java相继流行。C++和Java提供了面向对象的编程范式，以及丰富的对象库。在牺牲了一定的性能的代价下，C++和Java大大提高了程序的产量。语言的易用性被提到一个新的高度。我们还记得，ABC失败的一个重要原因是硬件的性能限制。从这方面说，Python要比ABC幸运许多。</p>
+<p>另一个悄然发生的改变是Internet。1990年代还是个人电脑的时代，windows和Intel挟PC以令天下，盛极一时。尽管Internet为主体的信息革命尚未到来，但许多程序员以及资深计算机用户已经在频繁使用Internet进行交流 (包括email和newsgroup)。Internet让信息交流成本大大下降。一种新的软件开发模式开始流行：开源 (open source)。程序员利用业余时间进行软件开发，并开放源代码。1991年，Linus在comp.os.minix新闻组上发布了Linux内核源代码，吸引大批hacker的加入。Linux和GNU相互合作，最终构成了一个充满活力的开源平台。</p>
+<p>硬件性能不是瓶颈，Python又容易使用，所以许多人开始转向Python。Guido维护了一个maillist，Python用户就通过邮件进行交流。Python用户来自许多领域，有不同的背景，对Python也有不同的需求。Python相当的开放，又容易拓展，所以当用户不满足于现有功能，很容易对Python进行拓展或改造。随后，这些用户将改动发给Guido，并由Guido决定是否将新的特征加入到Python或者标准库中。如果代码能被纳入Python自身或者标准库，这将极大的荣誉。Python自身也因此变得更好。</p>
+<p>(Guido不得不作出许多决定，这也是他被称为<a href="http://en.wikipedia.org/wiki/Benevolent_Dictator_For_Life" target="_blank" rel="noopener">Benevolent Dictator For Life</a>的原因)</p>
+<p>Python被称为“Battery Included”，是说它以及其标准库的功能强大。这些是整个社区的贡献。Python的开发者来自不同领域，他们将不同领域的优点带给Python。比如Python标准库中的正则表达(regular expression)是参考Perl，而lambda, map, filter, reduce函数参考Lisp。Python本身的一些功能以及大部分的标准库来自于社区。Python的社区不断扩大，进而拥有了自己的newsgroup，网站(python.org)，以及基金 (Python Software Foundation)。从Python 2.0开始，Python也从maillist的开发方式，转为完全开源的开发方式。社区气氛已经形成，工作被整个社区分担，Python也获得了更加高速的发展。</p>
+<p>(由于Guido享有绝对的仲裁权，所以在Python早期maillist的开发时代，不少爱好者相当担心Guido的生命。他们甚至作出假设：如果Guido挂了的话，Python会怎样。见<a href="http://www.python.org/search/hypermail/python-1994q2/1040.html" target="_blank" rel="noopener">If Guido was hit by a bus</a>)</p>
+<p>到今天，Python的框架已经确立。Python语言以对象为核心组织代码(Everything is object)，支持多种编程范式(multi-paradigm)，采用动态类型(dynamic typing)，自动进行内存回收(garbage collection)。Python支持解释运行(interpret)，并能调用C库进行拓展。Python有强大的标准库 (battery included)。由于标准库的体系已经稳定，所以Python的生态系统开始拓展到第三方包。这些包，如Django, web.py, wxpython, numpy, matplotlib,PIL，将Python升级成了物种丰富的热带雨林。</p>
+<p>今天Python已经进入到3.0的时代。由于Python 3.0向后不兼容，所以从2.0到3.0的过渡并不容易。另一方面，Python的性能依然值得改进，Python的运算性能低于C++和Java(见<a href="https://groups.google.com/forum/?fromgroups#!topic/unladen-swallow/TtvEBvVEZD4" target="_blank" rel="noopener">Google的讨论</a>)。Python依然是一个在发展中的语言。我期待看到Python的未来。</p>
+<h3 id="Python启示录"><a href="#Python启示录" class="headerlink" title="Python启示录"></a>Python启示录</h3><p>Python崇尚优美、清晰、简单，是一个优秀并广泛使用的语言 (TIOBE语言排行第八，Google的第三大开发语言，Dropbox的基础语言，豆瓣的服务器语言)。这个世界并不缺乏优秀的语言，但Python的发展史作为一个代表，带给我许多启示。</p>
+<p>在Python的开发过程中，社区起到了重要的作用。Guido自认为自己不是全能型的程序员，所以他只负责制订框架。如果问题太复杂，他会选择绕过去，也就是cut the corner。这些问题最终由社区中的其他人解决。社区中的人才是异常丰富的，就连创建网站，筹集基金这样与开发稍远的事情，也有人乐意于处理。如今的项目开发越来越复杂，越来越庞大，合作以及开放的心态成为项目最终成功的关键。</p>
+<p>Python从其他语言中学到了很多，无论是已经进入历史的ABC，还是依然在使用的C和Perl，以及许多没有列出的其他语言。可以说，Python的成功代表了它所有借鉴的语言的成功。同样，Ruby借鉴了Python，它的成功也代表了Python某些方面的成功。每个语言都是混合体，都有它优秀的地方，但也有各种各样的缺陷。同时，一个语言“好与不好”的评判，往往受制于平台、硬件、时代等等外部原因。程序员经历过许多语言之争。我想，为什么不以开放的心态和客观的分析，去区分一下每个语言的具体优点缺点，去区分内部和外部的因素。说不定哪一天发现，我不喜欢的某个语言中，正包含了我所需要的东西。</p>
+<p>无论Python未来的命运如何，Python的历史已经是本很有趣的小说</p>
+]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vim配置入门</title>
+    <url>/2020/09/23/Vim%E9%85%8D%E7%BD%AE%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p>作者： <a href="http://www.ruanyifeng.com/" target="_blank" rel="noopener">阮一峰</a></p>
+<p>Vim 是最重要的编辑器之一，主要有下面几个优点。</p>
+<p><img src="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/bg2018091601.jpg" alt="img"></p>
+<blockquote>
+<ul>
+<li>可以不使用鼠标，完全用键盘操作。</li>
+<li>系统资源占用小，打开大文件毫无压力。</li>
+<li>键盘命令变成肌肉记忆以后，操作速度极快。</li>
+<li>服务器默认都安装 Vi 或 Vim。</li>
+</ul>
+</blockquote>
+<p>Vim 的配置不太容易，它有自己的语法，许许多多的命令。我总是记不清楚，所以就整理了下面这篇文章，列出主要配置项的含义。</p>
+<a id="more"></a>
+
+<h2 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h2><p>Vim 的全局配置一般在<code>/etc/vim/vimrc</code>或者<code>/etc/vimrc</code>，对所有用户生效。用户个人的配置在<code>~/.vimrc</code>。</p>
+<p>如果只对单次编辑启用某个配置项，可以在命令模式下，先输入一个冒号，再输入配置。举例来说，<code>set number</code>这个配置可以写在<code>.vimrc</code>里面，也可以在命令模式输入。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">:<span class="built_in">set</span> number</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>配置项一般都有”打开”和”关闭”两个设置。”关闭”就是在”打开”前面加上前缀”no”。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="string">" 打开</span></span><br><span class="line"><span class="string">set number</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"</span> 关闭</span><br><span class="line"><span class="built_in">set</span> nonumber</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面代码中，双引号开始的行表示注释。</p>
+<p>查询某个配置项是打开还是关闭，可以在命令模式下，输入该配置，并在后面加上问号。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">:<span class="built_in">set</span> number?</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面的命令会返回<code>number</code>或者<code>nonumber</code>。</p>
+<p>如果想查看帮助，可以使用<code>help</code>命令。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">:<span class="built_in">help</span> number</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="二、基本配置"><a href="#二、基本配置" class="headerlink" title="二、基本配置"></a>二、基本配置</h2><p>（1）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> nocompatible</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>不与 Vi 兼容（采用 Vim 自己的操作命令）。</p>
+<p>（2）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">syntax on</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>打开语法高亮。自动识别代码，使用多种颜色显示。</p>
+<p>（3）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> showmode</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在底部显示，当前处于命令模式还是插入模式。</p>
+<p>（4）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> showcmd</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>命令模式下，在底部显示，当前键入的指令。比如，键入的指令是<code>2y3d</code>，那么底部就会显示<code>2y3</code>，当键入<code>d</code>的时候，操作完成，显示消失。</p>
+<p>（5）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> mouse=a</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>支持使用鼠标。</p>
+<p>（6）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> encoding=utf-8  </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>使用 utf-8 编码。</p>
+<p>（7）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> t_Co=256</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>启用256色。</p>
+<p>（8）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">filetype indent on</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>开启文件类型检查，并且载入与该类型对应的缩进规则。比如，如果编辑的是<code>.py</code>文件，Vim 就是会找 Python 的缩进规则<code>~/.vim/indent/python.vim</code>。</p>
+<h2 id="三、缩进"><a href="#三、缩进" class="headerlink" title="三、缩进"></a>三、缩进</h2><p>（9）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> autoindent</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。</p>
+<p>（10）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> tabstop=2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>按下 Tab 键时，Vim 显示的空格数。</p>
+<p>（11）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> shiftwidth=4</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在文本上按下<code>&gt;&gt;</code>（增加一级缩进）、<code>&lt;&lt;</code>（取消一级缩进）或者<code>==</code>（取消全部缩进）时，每一级的字符数。</p>
+<p>（12）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> expandtab</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。</p>
+<p>（13）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> softtabstop=2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Tab 转为多少个空格。</p>
+<h2 id="四、外观"><a href="#四、外观" class="headerlink" title="四、外观"></a>四、外观</h2><p>（14）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> number</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>显示行号</p>
+<p>（15）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> relativenumber</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>显示光标所在的当前行的行号，其他行都为相对于该行的相对行号。</p>
+<p>（16）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> cursorline</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>光标所在的当前行高亮。</p>
+<p>（17）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> textwidth=80</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>设置行宽，即一行显示多少个字符。</p>
+<p>（18）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> wrap</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>自动折行，即太长的行分成几行显示。</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> nowrap</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>关闭自动折行</p>
+<p>（19）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> linebreak</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>只有遇到指定的符号（比如空格、连词号和其他标点符号），才发生折行。也就是说，不会在单词内部折行。</p>
+<p>（20）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> wrapmargin=2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>指定折行处与编辑窗口的右边缘之间空出的字符数。</p>
+<p>（21）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> scrolloff=5</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>垂直滚动时，光标距离顶部/底部的位置（单位：行）。</p>
+<p>（22）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> sidescrolloff=15</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>水平滚动时，光标距离行首或行尾的位置（单位：字符）。该配置在不折行时比较有用。</p>
+<p>（23）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> laststatus=2</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>是否显示状态栏。0 表示不显示，1 表示只在多窗口时显示，2 表示显示。</p>
+<p>（24）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span>  ruler</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>在状态栏显示光标的当前位置（位于哪一行哪一列）。</p>
+<h2 id="五、搜索"><a href="#五、搜索" class="headerlink" title="五、搜索"></a>五、搜索</h2><p>（25）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> showmatch</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号。</p>
+<p>（26）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> hlsearch</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>搜索时，高亮显示匹配结果。</p>
+<p>（27）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> incsearch</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。</p>
+<p>（28）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> ignorecase</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>搜索时忽略大小写。</p>
+<p>（29）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> smartcase</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>如果同时打开了<code>ignorecase</code>，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。比如，搜索<code>Test</code>时，将不匹配<code>test</code>；搜索<code>test</code>时，将匹配<code>Test</code>。</p>
+<h2 id="六、编辑"><a href="#六、编辑" class="headerlink" title="六、编辑"></a>六、编辑</h2><p>（30）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> spell spelllang=en_us</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>打开英语单词的拼写检查。</p>
+<p>（31）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> nobackup</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>不创建备份文件。默认情况下，文件保存时，会额外创建一个备份文件，它的文件名是在原文件名的末尾，再添加一个波浪号（〜）。</p>
+<p>（32）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> noswapfile</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>不创建交换文件。交换文件主要用于系统崩溃时恢复文件，文件名的开头是<code>.</code>、结尾是<code>.swp</code>。</p>
+<p>（33）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> undofile</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>保留撤销历史。</p>
+<p>Vim 会在编辑时保存操作历史，用来供用户撤消更改。默认情况下，操作记录只在本次编辑时有效，一旦编辑结束、文件关闭，操作历史就消失了。</p>
+<p>打开这个设置，可以在文件关闭后，操作记录保留在一个文件里面，继续存在。这意味着，重新打开一个文件，可以撤销上一次编辑时的操作。撤消文件是跟原文件保存在一起的隐藏文件，文件名以<code>.un~</code>开头。</p>
+<p>（34）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> backupdir=~/.vim/.backup//  </span><br><span class="line"><span class="built_in">set</span> directory=~/.vim/.swp//</span><br><span class="line"><span class="built_in">set</span> undodir=~/.vim/.undo// </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>设置备份文件、交换文件、操作历史文件的保存位置。</p>
+<p>结尾的<code>//</code>表示生成的文件名带有绝对路径，路径中用<code>%</code>替换目录分隔符，这样可以防止文件重名。</p>
+<p>（35）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> autochdir</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>自动切换工作目录。这主要用在一个 Vim 会话之中打开多个文件的情况，默认的工作目录是打开的第一个文件的目录。该配置可以将工作目录自动切换到，正在编辑的文件的目录。</p>
+<p>（36）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> noerrorbells</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>出错时，不要发出响声。</p>
+<p>（37）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> visualbell</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>出错时，发出视觉提示，通常是屏幕闪烁。</p>
+<p>（38）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="built_in">history</span>=1000</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Vim 需要记住多少次历史操作。</p>
+<p>（39）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> autoread</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>打开文件监视。如果在编辑过程中文件发生外部改变（比如被别的编辑器编辑了），就会发出提示。</p>
+<p>（40）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> listchars=tab:»■,trail:■</span><br><span class="line"><span class="built_in">set</span> list</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>如果行尾有多余的空格（包括 Tab 键），该配置将让这些空格显示成可见的小方块。</p>
+<p>（41）</p>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> wildmenu</span><br><span class="line"><span class="built_in">set</span> wildmode=longest:list,full</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>命令模式下，底部操作指令按下 Tab 键自动补全。第一次按下 Tab，会显示所有匹配的操作指令的清单；第二次按下 Tab，会依次选择各个指令。</p>
+]]></content>
+      <tags>
+        <tag>vim</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python学习笔记</title>
+    <url>/2020/10/19/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h3 id="变量和数据类型"><a href="#变量和数据类型" class="headerlink" title="变量和数据类型"></a><a href="https://github.com/Brutustao/PythonNote/blob/main/pybase/01.%E5%8F%98%E9%87%8F%E5%92%8C%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.md" target="_blank" rel="noopener">变量和数据类型</a></h3><h3 id="字符"><a href="#字符" class="headerlink" title="字符"></a><a href="https://github.com/Brutustao/PythonNote/blob/main/pybase/02.%E5%AD%97%E7%AC%A6%E4%B8%B2.md" target="_blank" rel="noopener">字符</a></h3><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h3 id="用户输入和while循环"><a href="#用户输入和while循环" class="headerlink" title="用户输入和while循环"></a>用户输入和while循环</h3><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><h3 id="文件和异常"><a href="#文件和异常" class="headerlink" title="文件和异常"></a>文件和异常</h3>]]></content>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+</search>
