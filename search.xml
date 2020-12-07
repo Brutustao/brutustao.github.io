@@ -1002,4 +1002,13 @@
         <tag>vim</tag>
       </tags>
   </entry>
+  <entry>
+    <title>math</title>
+    <url>/2020/11/27/math/</url>
+    <content><![CDATA[<p>$$<br>$\pi = 3.14<br>$$</p>
+]]></content>
+      <tags>
+        <tag>math</tag>
+      </tags>
+  </entry>
 </search>
