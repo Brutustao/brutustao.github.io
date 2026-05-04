@@ -4,10 +4,12 @@ date: 2020-09-20 09:00:00
 tags:
   - python,
 ---
-<!-- more -->
 
 
 作者：Vamei 出处：[http://www.cnblogs.com/vamei](http://www.cnblogs.com/vamei) 欢迎转载，也请保留这段声明。谢谢！
+
+<!-- more -->
+
 
 
 Python是我喜欢的语言，简洁，优美，容易使用。前两天，我很激昂的向朋友宣传Python的好处。

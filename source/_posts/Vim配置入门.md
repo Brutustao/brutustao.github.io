@@ -4,10 +4,12 @@ date: 2020-09-23 09:00:00
 tags:
   - vim,
 ---
-<!-- more -->
 
 
 作者： [阮一峰](http://www.ruanyifeng.com/)
+
+<!-- more -->
+
 
 
 Vim 是最重要的编辑器之一，主要有下面几个优点。

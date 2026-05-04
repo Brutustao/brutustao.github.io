@@ -4,10 +4,12 @@ date: 2020-09-17 09:00:00
 tags:
   - vim,
 ---
-<!-- more -->
 
 
 vim的学习曲线相当的大（参看[各种文本编辑器的学习曲线](https://coolshell.cn/articles/3125.html)），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《[Learn Vim Progressively](http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/)》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。
+
+<!-- more -->
+
 
 
 ——————————正文开始——————————
