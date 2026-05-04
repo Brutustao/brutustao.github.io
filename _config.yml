@@ -117,5 +117,5 @@ theme_config:
     tags: /tags/ || fa fa-tags
     archives: /archives/ || fa fa-archive
   avatar:
-    url: /images/avatar.gif
+    url: /images/avatar.jpg
   darkmode: false
