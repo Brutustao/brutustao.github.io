@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我的博客
-subtitle: '记录技术与生活'
-description: '一个使用 Hexo 搭建的个人博客'
-keywords: 博客,技术,生活
-author: 博主
-language: zh-CN
+title: biantaobook
+subtitle: ''
+description: ''
+keywords:
+author: brutus
+language: zh-Hans
 timezone: Asia/Shanghai
 
 # URL
@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment

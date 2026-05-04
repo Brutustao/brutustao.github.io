@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Copy theme
+        run: cp -r node_modules/hexo-theme-next themes/next
+
       - name: Generate static files
         run: npx hexo generate
 

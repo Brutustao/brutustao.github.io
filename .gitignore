@@ -1,4 +1,5 @@
 node_modules/
 public/
+themes/next/
 db.json
 *.log
