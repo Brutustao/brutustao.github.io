@@ -107,7 +107,7 @@ deploy:
 theme_config:
   sidebar:
     display: always
-    position: left
+    position: right
   scheme: Pisces
   social:
     GitHub: https://github.com/Brutustao || fab fa-github
