@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"brutustao.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="vim的学习曲线相当的大（参看各种文本编辑器的学习曲线），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《Learn Vim Progressively》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。 ——————————正文开始—————————— 你想以最快的速度学习人类史上最好的">
+    <meta name="description" content="vim的学习曲线相当的大（参看各种文本编辑器的学习曲线），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《Learn Vim Progressively》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简明vim练级攻略">
 <meta property="og:url" content="https://brutustao.github.io/2020/09/17/%E7%AE%80%E6%98%8Evim%E7%BB%83%E7%BA%A7%E6%94%BB%E7%95%A5/index.html">
 <meta property="og:site_name" content="biantaobook">
-<meta property="og:description" content="vim的学习曲线相当的大（参看各种文本编辑器的学习曲线），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《Learn Vim Progressively》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。 ——————————正文开始—————————— 你想以最快的速度学习人类史上最好的">
+<meta property="og:description" content="vim的学习曲线相当的大（参看各种文本编辑器的学习曲线），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《Learn Vim Progressively》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。">
 <meta property="og:locale">
 <meta property="og:image" content="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/word_moves.jpg">
 <meta property="og:image" content="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/line_moves.jpg">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/append-to-many-lines.gif">
 <meta property="og:image" content="https://biantaopicgo.oss-cn-beijing.aliyuncs.com/split.gif">
 <meta property="article:published_time" content="2020-09-17T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-04T15:57:27.940Z">
+<meta property="article:modified_time" content="2026-05-04T16:05:21.193Z">
 <meta property="article:author" content="brutus">
 <meta property="article:tag" content="vim,">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">عُدل في</span>
-      <time title="عُدل: 2026-05-04 23:57:27" itemprop="dateModified" datetime="2026-05-04T23:57:27+08:00">2026-05-04</time>
+      <time title="عُدل: 2026-05-05 00:05:21" itemprop="dateModified" datetime="2026-05-05T00:05:21+08:00">2026-05-05</time>
     </span>
 
   
@@ -241,10 +241,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><p>vim的学习曲线相当的大（参看<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/3125.html">各种文本编辑器的学习曲线</a>），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《<a target="_blank" rel="noopener" href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">Learn Vim Progressively</a>》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。</p>
+<span id="more"></span>
 
 
-<p>vim的学习曲线相当的大（参看<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/3125.html">各种文本编辑器的学习曲线</a>），所以，如果你一开始看到的是一大堆VIM的命令分类，你一定会对这个编辑器失去兴趣的。下面的文章翻译自《<a target="_blank" rel="noopener" href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">Learn Vim Progressively</a>》，我觉得这是给新手最好的VIM的升级教程了，没有列举所有的命令，只是列举了那些最有用的命令。非常不错。</p>
+
 <p>——————————正文开始——————————</p>
 <p>你想以最快的速度学习人类史上最好的文本编辑器VIM吗？你先得懂得如何在VIM幸存下来，然后一点一点地学习各种戏法。</p>
 <p><a target="_blank" rel="noopener" href="http://www.vim.org/">Vim</a> the Six Billion Dollar editor</p>

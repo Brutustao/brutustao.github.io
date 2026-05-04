@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"brutustao.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"بحث...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="1爬虫相关库与urllib12345from urllib import requesturl &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&quot;response &#x3D; request.urlopen(url,timeout&#x3D;1)print(response.read().decode(&quot;utf-8&quot;))   2网页的两种请求方式1.get方式 1234f">
+    <meta name="description" content="1爬虫相关库与urllib">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python爬虫（1）">
 <meta property="og:url" content="https://brutustao.github.io/2020/09/16/python%E7%88%AC%E8%99%AB%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="biantaobook">
-<meta property="og:description" content="1爬虫相关库与urllib12345from urllib import requesturl &#x3D; &quot;http:&#x2F;&#x2F;www.baidu.com&quot;response &#x3D; request.urlopen(url,timeout&#x3D;1)print(response.read().decode(&quot;utf-8&quot;))   2网页的两种请求方式1.get方式 1234f">
+<meta property="og:description" content="1爬虫相关库与urllib">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-09-16T01:00:00.000Z">
-<meta property="article:modified_time" content="2026-05-04T15:57:27.940Z">
+<meta property="article:modified_time" content="2026-05-04T16:05:21.193Z">
 <meta property="article:author" content="brutus">
 <meta property="article:tag" content="python,">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">عُدل في</span>
-      <time title="عُدل: 2026-05-04 23:57:27" itemprop="dateModified" datetime="2026-05-04T23:57:27+08:00">2026-05-04</time>
+      <time title="عُدل: 2026-05-05 00:05:21" itemprop="dateModified" datetime="2026-05-05T00:05:21+08:00">2026-05-05</time>
     </span>
 
   
@@ -231,10 +231,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><h3 id="1爬虫相关库与urllib"><a href="#1爬虫相关库与urllib" class="headerlink" title="1爬虫相关库与urllib"></a><a href="#1%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3%E5%BA%93%E4%B8%8Eurllib"></a>1爬虫相关库与urllib</h3><span id="more"></span>
 
 
-<h3 id="1爬虫相关库与urllib"><a href="#1爬虫相关库与urllib" class="headerlink" title="1爬虫相关库与urllib"></a><a href="#1%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3%E5%BA%93%E4%B8%8Eurllib"></a>1爬虫相关库与urllib</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://www.baidu.com&quot;</span></span><br><span class="line">response = request.urlopen(url,timeout=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(response.read().decode(<span class="string">&quot;utf-8&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://www.baidu.com&quot;</span></span><br><span class="line">response = request.urlopen(url,timeout=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(response.read().decode(<span class="string">&quot;utf-8&quot;</span>))</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="2网页的两种请求方式"><a href="#2网页的两种请求方式" class="headerlink" title="2网页的两种请求方式"></a><a href="#2%E7%BD%91%E9%A1%B5%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"></a>2网页的两种请求方式</h3><p>1.get方式</p>
