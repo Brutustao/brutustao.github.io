@@ -1,9 +1,11 @@
-﻿---
+---
 title: python第一课
 date: 2020-08-04 09:00:00
 tags:
   - python,
 ---
+<!-- more -->
+
 
 python之禅最好的翻译，转自知乎！[原文链接 ](https://zhuanlan.zhihu.com/p/40950546)
 

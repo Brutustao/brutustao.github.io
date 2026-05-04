@@ -1,9 +1,11 @@
-﻿---
+---
 title: Python简史
 date: 2020-09-20 09:00:00
 tags:
   - python,
 ---
+<!-- more -->
+
 
 作者：Vamei 出处：[http://www.cnblogs.com/vamei](http://www.cnblogs.com/vamei) 欢迎转载，也请保留这段声明。谢谢！
 

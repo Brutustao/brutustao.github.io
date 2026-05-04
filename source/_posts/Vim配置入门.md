@@ -1,9 +1,11 @@
-﻿---
+---
 title: Vim配置入门
 date: 2020-09-23 09:00:00
 tags:
   - vim,
 ---
+<!-- more -->
+
 
 作者： [阮一峰](http://www.ruanyifeng.com/)
 
