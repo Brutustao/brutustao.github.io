@@ -102,3 +102,20 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+# NexT theme overrides
+theme_config:
+  sidebar:
+    display: always
+    position: left
+  scheme: Pisces
+  social:
+    GitHub: https://github.com/Brutustao || fab fa-github
+    Twitter: https://twitter.com/brutustao || fab fa-twitter
+  menu:
+    home: / || fa fa-home
+    tags: /tags/ || fa fa-tags
+    archives: /archives/ || fa fa-archive
+  avatar:
+    url: /images/avatar.gif
+  darkmode: false
