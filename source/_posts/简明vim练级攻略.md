@@ -2,7 +2,7 @@
 title: 简明vim练级攻略
 date: 2020-09-17 09:00:00
 tags:
-  - vim,
+  - vim
 ---
 
 

@@ -2,7 +2,7 @@
 title: linux常用命令
 date: 2020-08-10 09:00:00
 tags:
-  - linux,
+  - linux
 ---
 
 

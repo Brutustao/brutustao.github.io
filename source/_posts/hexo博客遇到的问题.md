@@ -2,7 +2,7 @@
 title: hexo博客遇到的问题
 date: 2020-08-10 09:00:00
 tags:
-  - hexo,
+  - hexo
 ---
 
 

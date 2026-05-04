@@ -2,7 +2,7 @@
 title: python第一课
 date: 2020-08-04 09:00:00
 tags:
-  - python,
+  - python
 ---
 
 

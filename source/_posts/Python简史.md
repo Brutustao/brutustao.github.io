@@ -2,7 +2,7 @@
 title: Python简史
 date: 2020-09-20 09:00:00
 tags:
-  - python,
+  - python
 ---
 
 
