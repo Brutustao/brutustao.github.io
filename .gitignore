@@ -3,3 +3,5 @@ public/
 themes/next/
 db.json
 *.log
+comments-server/node_modules/
+comments-server/comments.json

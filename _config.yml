@@ -119,3 +119,5 @@ theme_config:
   avatar:
     url: /images/avatar.jpg
   darkmode: false
+  custom_file_path:
+    bodyEnd: source/_data/body-end.njk
